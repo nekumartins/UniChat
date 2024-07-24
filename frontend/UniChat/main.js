@@ -7,12 +7,12 @@ import { getFirestore, collection, doc, setDoc, onSnapshot, getDoc, updateDoc } 
 
 // Your web app's Firebase configuration
 
-require('dotenv').config();
+
 
 import './style.css';
 
 const firebaseConfig = {
-  apiKey: "API_KEY",
+  apiKey: "AIzaSyC-vdQpJbm2l3LMmq-lzC4obnFhE8VLlpU",
   authDomain: "unichat-ce212.firebaseapp.com",
   projectId: "unichat-ce212",
   storageBucket: "unichat-ce212.appspot.com",
