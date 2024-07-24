@@ -7,7 +7,6 @@ import { getFirestore, collection, doc, setDoc, onSnapshot, getDoc, updateDoc } 
 
 // Your web app's Firebase configuration
 
-require('dotenv').config();
 
 import './style.css';
 
