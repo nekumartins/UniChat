@@ -152,28 +152,36 @@ answerButton.onclick = async () => {
     }
   };
 
-  const callData = (await getDoc(callDoc)).data();
+  try {
+    const callData = (await getDoc(callDoc)).data();
 
-  const offerDescription = callData.offer;
-  await pc.setRemoteDescription(new RTCSessionDescription(offerDescription));
+    if (callData && callData.offer) {
+      const offerDescription = callData.offer;
+      await pc.setRemoteDescription(new RTCSessionDescription(offerDescription));
 
-  const answerDescription = await pc.createAnswer();
-  await pc.setLocalDescription(answerDescription);
+      const answerDescription = await pc.createAnswer();
+      await pc.setLocalDescription(answerDescription);
 
-  const answer = {
-    type: answerDescription.type,
-    sdp: answerDescription.sdp,
-  };
+      const answer = {
+        type: answerDescription.type,
+        sdp: answerDescription.sdp,
+      };
 
-  await updateDoc(callDoc, { answer });
+      await updateDoc(callDoc, { answer });
 
-  onSnapshot(offerCandidates, (snapshot) => {
-    snapshot.docChanges().forEach((change) => {
-      console.log(change);
-      if (change.type === 'added') {
-        let data = change.doc.data();
-        pc.addIceCandidate(new RTCIceCandidate(data));
-      }
-    });
-  });
+      onSnapshot(offerCandidates, (snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+          console.log(change);
+          if (change.type === 'added') {
+            let data = change.doc.data();
+            pc.addIceCandidate(new RTCIceCandidate(data));
+          }
+        });
+      });
+    } else {
+      console.error("Offer is undefined in the document data");
+    }
+  } catch (error) {
+    console.error("Error fetching document: ", error);
+  }
 };
