@@ -7,16 +7,17 @@ import { getFirestore, collection, doc, setDoc, onSnapshot, getDoc, updateDoc } 
 
 // Your web app's Firebase configuration
 
+require('dotenv').config();
 
 import './style.css';
 
 const firebaseConfig = {
-  apiKey: process.env.API_KEY,
-  authDomain: process.env.AUTH_DOMAIN,
-  projectId: process.env.PROJECT_ID,
-  storageBucket: process.env.STORAGE_BUCKET,
-  messagingSenderId: process.env.MESSAGING_SENDER_ID,
-  appId: process.env.APP_ID
+  apiKey: "API_KEY",
+  authDomain: "unichat-ce212.firebaseapp.com",
+  projectId: "unichat-ce212",
+  storageBucket: "unichat-ce212.appspot.com",
+  messagingSenderId: "495798883164",
+  appId: "1:495798883164:web:6b83d71c08ffec4911e799"
 };
 
 // Initialize Firebase
