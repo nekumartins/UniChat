@@ -168,12 +168,16 @@ answerButton.onclick = async () => {
       };
 
       await updateDoc(callDoc, { answer });
+      console.log("Answer saved to Firestore:", answer);
+
 
       onSnapshot(offerCandidates, (snapshot) => {
         snapshot.docChanges().forEach((change) => {
-          console.log(change);
+          console.log("Offer candidate change detected:", change);
           if (change.type === 'added') {
             let data = change.doc.data();
+            console.log("New offer candidate data:", data);
+
             pc.addIceCandidate(new RTCIceCandidate(data));
           }
         });
